@@ -1,6 +1,6 @@
 package com.marcioh.sistemabiblioteca.repository;
 
-import com.marcioh.sistemabiblioteca.DAO.AlunoDAO;
+import com.marcioh.sistemabiblioteca.dao.AlunoDAO;
 import com.marcioh.sistemabiblioteca.model.Aluno;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -17,17 +17,9 @@ public class AlunoRepository implements AlunoDAO {
 
     @Override
     public Aluno findByMatricula(String matricula) {
-        return null;
-    }
-
-    @Override
-    public Aluno findByCpf(String cpf) {
-        return null;
-    }
-
-    @Override
-    public Aluno findByNome(String nome) {
-        return null;
+        return entityManager.createQuery("SELECT a FROM alunos a WHERE a.matricula = :matricula", Aluno.class)
+                .setParameter("matricula", matricula)
+                .getSingleResult();
     }
 
     @Override

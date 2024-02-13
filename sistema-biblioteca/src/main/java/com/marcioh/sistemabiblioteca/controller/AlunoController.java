@@ -20,6 +20,11 @@ public class AlunoController {
         return ResponseEntity.ok(service.listarAlunos());
     }
 
+    @GetMapping("/{matricula}")
+    public ResponseEntity<Aluno> listarPorMatricula(@PathVariable(value = "matricula") String matricula) {
+        return ResponseEntity.ok(service.listarPorMatricula(matricula));
+    }
+
     @PostMapping
     public ResponseEntity<Aluno> cadastrarAluno(@RequestBody Aluno aluno) {
         return ResponseEntity.ok(service.cadastrarAluno(aluno));

@@ -2,6 +2,7 @@ package com.marcioh.sistemabiblioteca.service;
 
 import com.marcioh.sistemabiblioteca.repository.AlunoRepository;
 import com.marcioh.sistemabiblioteca.model.Aluno;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,10 @@ public class AlunoService {
 
     public List<Aluno> listarAlunos() {
         return alunoDAO.findAll();
+    }
+
+    public Aluno listarPorMatricula(String matricula) {
+        return alunoDAO.findByMatricula(matricula);
     }
 
     public Aluno cadastrarAluno(Aluno aluno) {
