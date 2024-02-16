@@ -1,4 +1,4 @@
-package com.marcioh.sistemabiblioteca.DTO.itemEmprestimo;
+package com.marcioh.sistemabiblioteca.dto.itemEmprestimo;
 
 import com.marcioh.sistemabiblioteca.model.Livro;
 

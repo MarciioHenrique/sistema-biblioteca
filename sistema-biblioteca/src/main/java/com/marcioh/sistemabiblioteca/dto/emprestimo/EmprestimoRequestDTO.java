@@ -1,6 +1,6 @@
-package com.marcioh.sistemabiblioteca.DTO.emprestimo;
+package com.marcioh.sistemabiblioteca.dto.emprestimo;
 
-import com.marcioh.sistemabiblioteca.DTO.itemEmprestimo.ItemEmprestimoRequestDTO;
+import com.marcioh.sistemabiblioteca.dto.itemEmprestimo.ItemEmprestimoRequestDTO;
 import com.marcioh.sistemabiblioteca.model.Aluno;
 
 import java.util.Date;

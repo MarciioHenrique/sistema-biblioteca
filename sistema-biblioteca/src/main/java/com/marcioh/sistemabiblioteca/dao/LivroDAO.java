@@ -1,4 +1,4 @@
-package com.marcioh.sistemabiblioteca.DAO;
+package com.marcioh.sistemabiblioteca.dao;
 
 import com.marcioh.sistemabiblioteca.model.Livro;
 
