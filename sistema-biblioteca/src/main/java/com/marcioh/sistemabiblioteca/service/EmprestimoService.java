@@ -3,7 +3,9 @@ package com.marcioh.sistemabiblioteca.service;
 import com.marcioh.sistemabiblioteca.dto.emprestimo.EmprestimoRequestDTO;
 import com.marcioh.sistemabiblioteca.dto.emprestimo.EmprestimoResponseDTO;
 import com.marcioh.sistemabiblioteca.dto.itemEmprestimo.ItemEmprestimoResponseDTO;
+import com.marcioh.sistemabiblioteca.exception.BadRequestException;
 import com.marcioh.sistemabiblioteca.model.Aluno;
+import com.marcioh.sistemabiblioteca.model.Debito;
 import com.marcioh.sistemabiblioteca.model.Emprestimo;
 import com.marcioh.sistemabiblioteca.repository.EmprestimoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class EmprestimoService {
     @Autowired
     private AlunoService alunoService;
 
+    @Autowired
+    private DebitoService debitoService;
+
 
     public List<Emprestimo> listarEmprestimos() {
         return emprestimoDAO.findAll();
@@ -33,6 +38,10 @@ public class EmprestimoService {
         Aluno aluno = alunoService.listarPorMatricula(emprestimoRequest.alunoMatricula());
 
         //verifica se o aluno possui pendências
+        List<Debito> debitos = debitoService.listarDebitosAluno(emprestimoRequest.alunoMatricula());
+        if (!debitos.isEmpty()) {
+            throw new BadRequestException("O aluno possui débitos pendentes");
+        }
 
 
         //cria emprestimo
