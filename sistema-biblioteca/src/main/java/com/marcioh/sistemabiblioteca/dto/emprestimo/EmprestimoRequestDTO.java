@@ -9,6 +9,6 @@ import java.util.List;
 public record EmprestimoRequestDTO(
         Date dataEmprestimo,
         List<ItemEmprestimoRequestDTO> itensEmprestimo,
-        Aluno aluno
+        String alunoMatricula
 ) {
 }

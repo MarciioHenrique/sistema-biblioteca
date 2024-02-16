@@ -1,8 +1,10 @@
 package com.marcioh.sistemabiblioteca.repository;
 
 import com.marcioh.sistemabiblioteca.dao.AlunoDAO;
+import com.marcioh.sistemabiblioteca.exception.ResourceNotFoundException;
 import com.marcioh.sistemabiblioteca.model.Aluno;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,9 +19,14 @@ public class AlunoRepository implements AlunoDAO {
 
     @Override
     public Aluno findByMatricula(String matricula) {
-        return entityManager.createQuery("SELECT a FROM alunos a WHERE a.matricula = :matricula", Aluno.class)
-                .setParameter("matricula", matricula)
-                .getSingleResult();
+        try{
+            return entityManager.createQuery("SELECT a FROM alunos a WHERE a.matricula = :matricula", Aluno.class)
+                    .setParameter("matricula", matricula)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            throw new ResourceNotFoundException("Aluno não está cadastrado no sistema");
+        }
+
     }
 
     @Override

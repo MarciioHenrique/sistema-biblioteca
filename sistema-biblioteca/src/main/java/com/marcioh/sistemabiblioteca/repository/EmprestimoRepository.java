@@ -1,6 +1,6 @@
 package com.marcioh.sistemabiblioteca.repository;
 
-import com.marcioh.sistemabiblioteca.DAO.EmprestimoDAO;
+import com.marcioh.sistemabiblioteca.dao.EmprestimoDAO;
 import com.marcioh.sistemabiblioteca.model.Emprestimo;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;

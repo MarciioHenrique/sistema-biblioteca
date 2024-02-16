@@ -1,10 +1,10 @@
 package com.marcioh.sistemabiblioteca.service;
 
-import com.marcioh.sistemabiblioteca.DTO.emprestimo.EmprestimoRequestDTO;
-import com.marcioh.sistemabiblioteca.DTO.emprestimo.EmprestimoResponseDTO;
-import com.marcioh.sistemabiblioteca.DTO.itemEmprestimo.ItemEmprestimoResponseDTO;
+import com.marcioh.sistemabiblioteca.dto.emprestimo.EmprestimoRequestDTO;
+import com.marcioh.sistemabiblioteca.dto.emprestimo.EmprestimoResponseDTO;
+import com.marcioh.sistemabiblioteca.dto.itemEmprestimo.ItemEmprestimoResponseDTO;
+import com.marcioh.sistemabiblioteca.model.Aluno;
 import com.marcioh.sistemabiblioteca.model.Emprestimo;
-import com.marcioh.sistemabiblioteca.model.ItemEmprestimo;
 import com.marcioh.sistemabiblioteca.repository.EmprestimoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,17 +20,27 @@ public class EmprestimoService {
     @Autowired
     private ItemEmprestimoService itemEmprestimoService;
 
+    @Autowired
+    private AlunoService alunoService;
+
 
     public List<Emprestimo> listarEmprestimos() {
         return emprestimoDAO.findAll();
     }
 
     public EmprestimoResponseDTO  cadastrarEmprestimo(EmprestimoRequestDTO emprestimoRequest) {
+        //verifica se o aluno está cadastrado
+        Aluno aluno = alunoService.listarPorMatricula(emprestimoRequest.alunoMatricula());
+
+        //verifica se o aluno possui pendências
+
+
+        //cria emprestimo
         Emprestimo emprestimo = new Emprestimo();
         emprestimo.setDataEmprestimo(emprestimoRequest.dataEmprestimo());
         emprestimo.setDataPrevista(new Date(2024,10,1));
         emprestimo.setDevolucao(null);
-        emprestimo.setAluno(emprestimoRequest.aluno());
+        emprestimo.setAluno(aluno);
 
         emprestimoDAO.save(emprestimo);
 
