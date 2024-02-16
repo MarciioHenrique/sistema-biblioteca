@@ -43,6 +43,7 @@ public class EmprestimoService {
             throw new BadRequestException("O aluno possui débitos pendentes");
         }
 
+        itemEmprestimoService.verificarLivros(emprestimoRequest.itensEmprestimo());
 
         //cria emprestimo
         Emprestimo emprestimo = new Emprestimo();
