@@ -1,6 +1,6 @@
 package com.marcioh.sistemabiblioteca.repository;
 
-import com.marcioh.sistemabiblioteca.DAO.TituloDAO;
+import com.marcioh.sistemabiblioteca.dao.TituloDAO;
 import com.marcioh.sistemabiblioteca.model.Titulo;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;

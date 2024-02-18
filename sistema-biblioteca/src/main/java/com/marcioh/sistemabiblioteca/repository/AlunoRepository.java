@@ -19,7 +19,7 @@ public class AlunoRepository implements AlunoDAO {
 
     @Override
     public Aluno findByMatricula(String matricula) {
-        try{
+        try {
             return entityManager.createQuery("SELECT a FROM alunos a WHERE a.matricula = :matricula", Aluno.class)
                     .setParameter("matricula", matricula)
                     .getSingleResult();
