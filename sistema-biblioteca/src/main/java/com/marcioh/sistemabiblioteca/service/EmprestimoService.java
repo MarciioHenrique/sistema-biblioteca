@@ -7,10 +7,12 @@ import com.marcioh.sistemabiblioteca.exception.BadRequestException;
 import com.marcioh.sistemabiblioteca.model.Aluno;
 import com.marcioh.sistemabiblioteca.model.Debito;
 import com.marcioh.sistemabiblioteca.model.Emprestimo;
+import com.marcioh.sistemabiblioteca.model.ItemEmprestimo;
 import com.marcioh.sistemabiblioteca.repository.EmprestimoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -43,18 +45,18 @@ public class EmprestimoService {
             throw new BadRequestException("O aluno possui débitos pendentes");
         }
 
-        itemEmprestimoService.verificarLivros(emprestimoRequest.itensEmprestimo());
+        List<ItemEmprestimo> itensEmprestimo = itemEmprestimoService.verificarLivros(emprestimoRequest.itensEmprestimo());
 
         //cria emprestimo
         Emprestimo emprestimo = new Emprestimo();
         emprestimo.setDataEmprestimo(emprestimoRequest.dataEmprestimo());
-        emprestimo.setDataPrevista(new Date(2024,10,1));
+        emprestimo.setDataPrevista(CalculaDataPrevistaEmprestimo(itensEmprestimo));
         emprestimo.setDevolucao(null);
         emprestimo.setAluno(aluno);
 
         emprestimoDAO.save(emprestimo);
 
-        List<ItemEmprestimoResponseDTO> itensEmprestimo = itemEmprestimoService.cadastrarListaItensEmprestimo(emprestimoRequest.itensEmprestimo(), emprestimo);
+        List<ItemEmprestimoResponseDTO> itensEmprestimoResponse = itemEmprestimoService.cadastrarListaItensEmprestimo(itensEmprestimo, emprestimo);
 
         return new EmprestimoResponseDTO(
                 emprestimo.getId(),
@@ -62,7 +64,32 @@ public class EmprestimoService {
                 emprestimo.getDataPrevista(),
                 emprestimo.getAluno(),
                 emprestimo.getDevolucao(),
-                itensEmprestimo
+                itensEmprestimoResponse
         );
+    }
+
+    private Date CalculaDataPrevistaEmprestimo(List<ItemEmprestimo> itens)
+    {
+        Date dataAux;
+        Date dataPrevista = new Date();
+
+        for (ItemEmprestimo item : itens) {
+            dataAux = item.getDataPrevista();
+            if (dataPrevista.compareTo(dataAux) < 0)
+                dataPrevista = dataAux;
+        }
+        if (itens.size() > 2) {
+            int tam = itens.size()-2;
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(dataPrevista);
+            calendar.add(Calendar.DATE, (tam*2));
+            dataPrevista = calendar.getTime();
+        }
+        for (ItemEmprestimo item : itens) {
+            item.setDataPrevista(dataPrevista);
+        }
+
+        return dataPrevista;
+
     }
 }

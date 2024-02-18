@@ -27,7 +27,8 @@ public class ItemEmprestimoService {
         return itemEmprestimoDAO.save(itemEmprestimo);
     }
 
-    public void verificarLivros(List<ItemEmprestimoRequestDTO> itemEmprestimoRequest) {
+    public List<ItemEmprestimo> verificarLivros(List<ItemEmprestimoRequestDTO> itemEmprestimoRequest) {
+        List<ItemEmprestimo> itensEmprestimo = new ArrayList<>();
         for (ItemEmprestimoRequestDTO itemEmprestimo : itemEmprestimoRequest) {
             if (itemEmprestimoDAO.findByLivro(itemEmprestimo.livro().getId())) {
                 throw new BadRequestException("Livro já reservado");
@@ -35,24 +36,35 @@ public class ItemEmprestimoService {
             if (itemEmprestimo.livro().isExemplarBiblioteca()) {
                 throw new BadRequestException("Livro é exemplar da biblioteca e não pode ser emprestado");
             }
+            ItemEmprestimo item = new ItemEmprestimo();
+            item.setDataPrevista(calculaDataDevolucaoItem(new Date(), itemEmprestimo.livro().getTitulo().getPrazo()));
+            item.setLivro(itemEmprestimo.livro());
+            item.setEmprestimo(null);
+            itensEmprestimo.add(item);
+
         }
+        return itensEmprestimo;
     }
 
 
-    public List<ItemEmprestimoResponseDTO> cadastrarListaItensEmprestimo(List<ItemEmprestimoRequestDTO> itemEmprestimoRequest, Emprestimo emprestimo) {
+    public List<ItemEmprestimoResponseDTO> cadastrarListaItensEmprestimo(List<ItemEmprestimo> itensEmprestimo, Emprestimo emprestimo) {
         List<ItemEmprestimoResponseDTO> response = new ArrayList<>();
-        for (ItemEmprestimoRequestDTO itemEmprestimoRequestDTO : itemEmprestimoRequest) {
-            ItemEmprestimo itemEmprestimo = new ItemEmprestimo();
-            itemEmprestimo.setDataPrevista(new Date(2024, Calendar.JANUARY, 2));
-            itemEmprestimo.setLivro(itemEmprestimoRequestDTO.livro());
-            itemEmprestimo.setEmprestimo(emprestimo);
-            cadastrarItemEmprestimo(itemEmprestimo);
+        for (ItemEmprestimo item : itensEmprestimo) {
+            cadastrarItemEmprestimo(item);
             response.add(new ItemEmprestimoResponseDTO(
-                    itemEmprestimo.getId(),
-                    itemEmprestimo.getDataPrevista(),
-                    itemEmprestimo.getLivro()
+                    item.getId(),
+                    item.getDataPrevista(),
+                    item.getLivro()
             ));
         }
         return response;
+    }
+
+    public Date calculaDataDevolucaoItem(Date data, int prazo)
+    {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(data);
+        calendar.add(Calendar.DATE, prazo);
+        return calendar.getTime();
     }
 }
