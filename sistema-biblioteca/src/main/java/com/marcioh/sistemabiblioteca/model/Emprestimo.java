@@ -21,6 +21,7 @@ public class Emprestimo {
     private Long id;
     private Date dataEmprestimo;
     private Date dataPrevista;
+    private float multa;
     @OneToOne
     @Nullable
     private Devolucao devolucao;
