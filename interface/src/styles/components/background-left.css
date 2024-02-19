@@ -1,0 +1,60 @@
+.background-left {
+    height: 100%;
+    width: 30%;
+    background-image: linear-gradient(to right, var(--dark-blue), var(--light-blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.background-left-title {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-left-title label {
+    font-size: 3rem;
+    color: var(--text-white);
+}
+
+.background-left-options {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-left-option {
+    width: 100%;
+    height: 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all ease 0.5s;
+}
+
+.background-left-option:hover {
+    background-color: var(--light-blue);
+}
+
+.background-left-option label {
+    font-size: 1.6rem;
+    color: var(--text-white);
+    cursor: pointer;
+}
+
+.background-left-footer {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-white);
+}

@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'Poppins';   
+  src: url("../fonts/Poppins/Poppins-Medium.ttf");
+  font-weight: normal;
+  font-style: normal;
+} 
+
+* {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  margin: 0;
+
+  --dark-blue: #002C6A;
+  --light-blue: #0764A3;
+  --text-white: #FFFFFF;
+}

@@ -1,0 +1,27 @@
+.background {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.background-right {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-right h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--dark-blue);
+}
+
+.background-right h3 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--dark-blue);
+}
