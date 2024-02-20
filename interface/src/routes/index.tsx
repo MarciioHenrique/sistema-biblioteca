@@ -14,7 +14,8 @@ const Routes = () => {
             <Route path="*" element={<Home />} />
             <Route path="/" element={<Home />} />
             <Route path="/alunos" element={<Alunos />} />
-            <Route path="/livros" element={<Livros />} />
+            <Route path="/livros" element={<Livros />} />            
+            <Route path="/emprestimo" element={<Emprestimo />} />
         </RouterRoutes>
       </Fragment>
     </BrowserRouter>

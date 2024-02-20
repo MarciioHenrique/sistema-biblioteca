@@ -24,3 +24,9 @@ export interface Titulo {
     isbn: string;
     titulo: string;
 }
+
+export interface EmprestimoRequest {
+    alunoMatricula: string;
+    itensEmprestimo: LivroResponse[];
+    dataEmprestimo: string;
+}

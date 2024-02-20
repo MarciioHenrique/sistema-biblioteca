@@ -1,0 +1,243 @@
+.emprestimo-background {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.emprestimo-background-right {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.emprestimo-container {
+    width: 50%;
+    height: 50%;
+    border-radius: 10px;
+    background-image: linear-gradient(to top, var(--light-blue), var(--dark-blue));
+    filter: drop-shadow(0px 0px 6px darkgrey);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.emprestimo-container h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-white);
+    text-align: center;
+    margin-top: 1vh;
+}
+
+.emprestimo-input-container {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+}
+
+.emprestimo-input {
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    width: 50%;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #F0F2F5;
+}
+
+.emprestimo-label {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-white);
+    width: 15%;
+}
+
+.emprestimo-label-livros {
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.emprestimo-button-container {
+    height: 30%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+}
+
+.emprestimo-button {
+    height: 35%;
+    width: 35%;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--dark-blue);
+    background-color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.emprestimo-modal {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    overflow-y: hidden;
+}
+
+.emprestimo-modal-hidden {
+    display: none;
+}
+
+.emprestimo-modal-content {
+    height: 60%;
+    width: 60%;
+    border-radius: 10px;
+    background-color: var(--text-white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.emprestimo-modal-header {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--dark-blue);
+}
+
+.emprestimo-modal-title-container {
+    height: 100%;
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.emprestimo-modal-title-container h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark-blue);
+}
+
+.emprestimo-modal-close-container {
+    height: 100%;
+    width: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.emprestimo-modal-close-container label {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--dark-blue);
+}
+
+.emprestimo-input-search-container {
+    height: 15%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+}
+
+.emprestimo-input-search {
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    width: 40%;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #F0F2F5;
+}
+
+.emprestimo-button-search {
+    height: 60%;
+    line-height: 40px;
+    width: 10%;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    background-image: linear-gradient(to left, var(--dark-blue), var(--light-blue));
+    font-weight: 500;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.emprestimo-modal-books-container {
+    height: 70%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2vh;
+    gap: 1vh;
+}
+
+.emprestimo-modal-books-container table {
+    width: 90%;
+}
+
+.emprestimo-modal-books-container table thead {
+    background-color: var(--dark-blue);
+    color: white;
+}
+
+.emprestimo-modal-books-container table thead th {
+    padding: 1%;
+    text-align: center;
+}
+
+.emprestimo-modal-books-container table tbody tr {
+    background-color: white;
+    color: var(--dark-blue);
+    border: 1px solid var(--light-blue);
+    transition: all ease 0.3s;
+} 
+
+.emprestimo-modal-books-container table tbody tr:hover {
+    background-color: var(--light-blue);
+    color: white;
+    cursor: pointer;
+}
+
+.emprestimo-modal-books-container table tbody tr td {
+    padding: 1%;
+    text-align: center;
+}

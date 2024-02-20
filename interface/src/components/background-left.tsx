@@ -38,7 +38,7 @@ function BackgroundLeft(props: props) {
                 <div className={props.page == "Livros" ? "background-left-option-selected" : "background-left-option"} onClick={() => handleClick("Livros")}>
                     <label>Livros</label>
                 </div>
-                <div className={props.page == "Emprestimo" ? "background-left-option" : "background-left-option"}>
+                <div className={props.page == "Emprestimo" ? "background-left-option-selected" : "background-left-option"} onClick={() => handleClick("Emprestimo")}>
                     <label>Emprestimo</label>
                 </div>
                 <div className={props.page == "Devolução" ? "background-left-option" : "background-left-option"}>

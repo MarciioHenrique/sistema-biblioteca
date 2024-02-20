@@ -5,6 +5,7 @@ import com.marcioh.sistemabiblioteca.dto.itemEmprestimo.ItemEmprestimoResponseDT
 import com.marcioh.sistemabiblioteca.exception.BadRequestException;
 import com.marcioh.sistemabiblioteca.model.Emprestimo;
 import com.marcioh.sistemabiblioteca.model.ItemEmprestimo;
+import com.marcioh.sistemabiblioteca.model.Livro;
 import com.marcioh.sistemabiblioteca.repository.ItemEmprestimoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,18 +28,18 @@ public class ItemEmprestimoService {
         return itemEmprestimoDAO.save(itemEmprestimo);
     }
 
-    public List<ItemEmprestimo> verificarLivros(List<ItemEmprestimoRequestDTO> itemEmprestimoRequest) {
+    public List<ItemEmprestimo> verificarLivros(List<Livro> itemEmprestimoRequest) {
         List<ItemEmprestimo> itensEmprestimo = new ArrayList<>();
-        for (ItemEmprestimoRequestDTO itemEmprestimo : itemEmprestimoRequest) {
-            if (itemEmprestimoDAO.findByLivro(itemEmprestimo.livro().getId())) {
+        for (Livro itemEmprestimo : itemEmprestimoRequest) {
+            if (itemEmprestimoDAO.findByLivro(itemEmprestimo.getId())) {
                 throw new BadRequestException("Livro já reservado");
             }
-            if (itemEmprestimo.livro().isExemplarBiblioteca()) {
+            if (itemEmprestimo.isExemplarBiblioteca()) {
                 throw new BadRequestException("Livro é exemplar da biblioteca e não pode ser emprestado");
             }
             ItemEmprestimo item = new ItemEmprestimo();
-            item.setDataPrevista(calculaDataDevolucaoItem(new Date(), itemEmprestimo.livro().getTitulo().getPrazo()));
-            item.setLivro(itemEmprestimo.livro());
+            item.setDataPrevista(calculaDataDevolucaoItem(new Date(), itemEmprestimo.getTitulo().getPrazo()));
+            item.setLivro(itemEmprestimo);
             item.setEmprestimo(null);
             itensEmprestimo.add(item);
 

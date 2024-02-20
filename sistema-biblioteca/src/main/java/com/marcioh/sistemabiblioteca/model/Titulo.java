@@ -21,5 +21,5 @@ public class Titulo {
 
     private int prazo;
     private String isbn;
-    private String editora;
+    private String titulo;
 }
