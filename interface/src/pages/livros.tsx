@@ -14,7 +14,7 @@ function Livros() {
 
     const filteredBooks = useMemo(() => {
         return books?.filter((book) => {
-          return book.titulo.titulo.toLowerCase().includes(search.toLowerCase());
+          return book.id.toString().includes(search) || book.titulo.titulo.toLowerCase().includes(search.toLowerCase());
         });
       }, [books,doSearch]);
 
