@@ -3,6 +3,8 @@ import { Fragment } from "react";
 import { BrowserRouter, Route, Routes as RouterRoutes } from "react-router-dom";
 import Home from '../pages/home';
 import Alunos from '../pages/alunos';
+import Livros from '../pages/livros';
+import Emprestimo from '../pages/emprestimo';
 
 const Routes = () => {
   return (
@@ -12,6 +14,7 @@ const Routes = () => {
             <Route path="*" element={<Home />} />
             <Route path="/" element={<Home />} />
             <Route path="/alunos" element={<Alunos />} />
+            <Route path="/livros" element={<Livros />} />
         </RouterRoutes>
       </Fragment>
     </BrowserRouter>
