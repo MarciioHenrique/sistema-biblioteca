@@ -1,6 +1,7 @@
 package com.marcioh.sistemabiblioteca.repository;
 
 import com.marcioh.sistemabiblioteca.dao.EmprestimoDAO;
+import com.marcioh.sistemabiblioteca.model.Aluno;
 import com.marcioh.sistemabiblioteca.model.Emprestimo;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -21,7 +22,9 @@ public class EmprestimoRepository implements EmprestimoDAO {
 
     @Override
     public Emprestimo findByAlunoMatricula(String matricula) {
-        return null;
+        return entityManager.createQuery("SELECT a FROM emprestimos a WHERE a.aluno.matricula = :matricula", Emprestimo.class)
+                .setParameter("matricula", matricula)
+                .getSingleResult();
     }
 
     @Override

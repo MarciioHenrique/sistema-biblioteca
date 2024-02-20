@@ -8,7 +8,7 @@ import lombok.Setter;
 
 import java.util.Date;
 
-@Entity(name = "item_devolucao")
+@Entity(name = "itens_devolucao")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

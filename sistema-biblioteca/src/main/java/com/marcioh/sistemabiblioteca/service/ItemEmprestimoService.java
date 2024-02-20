@@ -51,6 +51,7 @@ public class ItemEmprestimoService {
     public List<ItemEmprestimoResponseDTO> cadastrarListaItensEmprestimo(List<ItemEmprestimo> itensEmprestimo, Emprestimo emprestimo) {
         List<ItemEmprestimoResponseDTO> response = new ArrayList<>();
         for (ItemEmprestimo item : itensEmprestimo) {
+            item.setEmprestimo(emprestimo);
             cadastrarItemEmprestimo(item);
             response.add(new ItemEmprestimoResponseDTO(
                     item.getId(),

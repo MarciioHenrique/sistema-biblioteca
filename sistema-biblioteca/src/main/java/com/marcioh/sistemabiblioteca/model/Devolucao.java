@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.util.Date;
 import java.util.List;
 
-@Entity(name = "devolucao")
+@Entity(name = "devolucoes")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -21,8 +21,7 @@ public class Devolucao {
     private Date dataDevoculao;
     private boolean atraso;
     private float valorTotal;
-    private float multa;
-    @OneToMany
-    private List<ItemDevolucao> itensDevolucao;
+    @OneToOne
+    private Emprestimo emprestimo;
 
 }

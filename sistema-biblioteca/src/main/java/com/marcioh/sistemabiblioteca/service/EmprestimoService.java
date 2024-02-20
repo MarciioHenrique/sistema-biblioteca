@@ -92,4 +92,8 @@ public class EmprestimoService {
         return dataPrevista;
 
     }
+
+    public Emprestimo listarEmprestimoAluno(String alunoMatricula) {
+        return emprestimoDAO.findByAlunoMatricula(alunoMatricula);
+    }
 }
