@@ -29,6 +29,9 @@ public class DevolucaoService {
     @Autowired
     private ItemDevolucaoService itemDevolucaoService;
 
+    @Autowired
+    private DebitoService debitoService;
+
     public List<Devolucao> findAll() {
         return devolucaoRepository.findAll();
     }
@@ -52,9 +55,15 @@ public class DevolucaoService {
         List<ItemDevolucaoResponseDTO> itensDevolucaoResponse = itemDevolucaoService.cadastrarItensDevolucao(itensDevolucao, devolucao);
         //falta atualizar o emprestimo para relacionar com a Devolucao
 
+        //emprestimoService.atualizarEmprestimo(emprestimo, devolucao);
+
+        if (devolucao.isAtraso()) {
+            debitoService.adicionarDebito(aluno, devolucao.getValorTotal());
+        }
+
         return new DevolucaoResponseDTO(
-                true,
-                10f,
+                devolucao.isAtraso(),
+                devolucao.getValorTotal(),
                 itensDevolucaoResponse
         );
     }

@@ -48,6 +48,7 @@ public class ItemDevolucaoService {
             itemDevolucao.setDiasAtraso(calculaDiasAtraso(dataDevolucao, dataPrevista));
             itemDevolucao.setValor(calculaValor(itemDevolucao.getMulta(), itemDevolucao.getDiasAtraso()));
             itemDevolucao.setDevolucao(null);
+            itensDevolucao.add(itemDevolucao);
         }
         return itensDevolucao;
     }
