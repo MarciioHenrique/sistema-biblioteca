@@ -36,7 +36,7 @@ public class DevolucaoService {
         return devolucaoRepository.findAll();
     }
 
-    public DevolucaoResponseDTO save(DevolucaoRequestDTO devolucaoRequest) {
+    public DevolucaoResponseDTO realizarDevolucao(DevolucaoRequestDTO devolucaoRequest) {
         //faz verificação do aluno
         Aluno aluno = alunoService.listarPorMatricula(devolucaoRequest.alunoMatricula());
 
@@ -55,7 +55,9 @@ public class DevolucaoService {
         List<ItemDevolucaoResponseDTO> itensDevolucaoResponse = itemDevolucaoService.cadastrarItensDevolucao(itensDevolucao, devolucao);
         //falta atualizar o emprestimo para relacionar com a Devolucao
 
-        //emprestimoService.atualizarEmprestimo(emprestimo, devolucao);
+
+        emprestimo.setDevolucao(devolucao);
+        emprestimoService.atualizarEmprestimo(emprestimo);
 
         if (devolucao.isAtraso()) {
             debitoService.adicionarDebito(aluno, devolucao.getValorTotal());

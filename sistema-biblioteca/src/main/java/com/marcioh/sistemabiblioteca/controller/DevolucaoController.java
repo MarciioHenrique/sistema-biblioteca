@@ -21,7 +21,7 @@ public class DevolucaoController {
         return ResponseEntity.ok(service.findAll());
     }
 
-    @PostMapping ResponseEntity<DevolucaoResponseDTO> save(@RequestBody DevolucaoRequestDTO devolucao) {
-        return ResponseEntity.ok(service.save(devolucao));
+    @PostMapping ResponseEntity<DevolucaoResponseDTO> realizarDevolucao(@RequestBody DevolucaoRequestDTO devolucao) {
+        return ResponseEntity.ok(service.realizarDevolucao(devolucao));
     }
 }

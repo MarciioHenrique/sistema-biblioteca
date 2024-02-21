@@ -38,14 +38,7 @@ public class EmprestimoRepository implements EmprestimoDAO {
 
     @Transactional
     @Override
-    public void atualizarEmprestimoDevolucao(Emprestimo emprestimo, Devolucao devolucao) {
-        int linhasAfetadas = entityManager.createQuery("UPDATE emprestimos a SET a.devolucao.id = :devolucao WHERE a.id = :id", Emprestimo.class)
-                .setParameter("devolucao", devolucao.getId())
-                .setParameter("id", emprestimo.getId())
-                .executeUpdate();
-
-        if (linhasAfetadas == 0) {
-            throw new RuntimeException("Empréstimo não encontrado");
-        }
+    public void atualizarEmprestimoDevolucao(Emprestimo emprestimo) {
+        entityManager.merge(emprestimo);
     }
 }

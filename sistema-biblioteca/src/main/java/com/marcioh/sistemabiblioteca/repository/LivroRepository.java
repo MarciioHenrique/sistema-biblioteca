@@ -31,4 +31,11 @@ public class LivroRepository implements LivroDAO {
         entityManager.persist(livro);
         return livro;
     }
+
+    @Transactional
+    @Override
+    public Livro livroIndisponivel(Livro livro) {
+        entityManager.merge(livro);
+        return livro;
+    }
 }

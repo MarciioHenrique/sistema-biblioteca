@@ -8,4 +8,5 @@ public interface LivroDAO {
     Livro findById(String id);
     List<Livro> findAll();
     Livro save(Livro livro);
+    Livro livroIndisponivel(Livro livro);
 }

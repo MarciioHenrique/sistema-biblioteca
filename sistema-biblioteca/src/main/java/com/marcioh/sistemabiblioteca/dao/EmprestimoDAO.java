@@ -9,6 +9,6 @@ public interface EmprestimoDAO {
     Emprestimo findByAlunoMatricula(String matricula);
     List<Emprestimo> findAll();
     Emprestimo save(Emprestimo emprestimo);
-    void atualizarEmprestimoDevolucao(Emprestimo emprestimo, Devolucao devolucao);
+    void atualizarEmprestimoDevolucao(Emprestimo emprestimo);
 
 }

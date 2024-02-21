@@ -1,5 +1,6 @@
 package com.marcioh.sistemabiblioteca.service;
 
+import com.marcioh.sistemabiblioteca.dto.emprestimo.EmprestimoAlunoResponseDTO;
 import com.marcioh.sistemabiblioteca.dto.emprestimo.EmprestimoRequestDTO;
 import com.marcioh.sistemabiblioteca.dto.emprestimo.EmprestimoResponseDTO;
 import com.marcioh.sistemabiblioteca.dto.itemEmprestimo.ItemEmprestimoResponseDTO;
@@ -9,6 +10,7 @@ import com.marcioh.sistemabiblioteca.repository.EmprestimoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -94,7 +96,19 @@ public class EmprestimoService {
         return emprestimoDAO.findByAlunoMatricula(alunoMatricula);
     }
 
-    public void atualizarEmprestimo(Emprestimo emprestimo, Devolucao devolucao) {
-        emprestimoDAO.atualizarEmprestimoDevolucao(emprestimo, devolucao);
+    public EmprestimoAlunoResponseDTO listarLivrosEmprestimoAluno(String alunoMatricula) {
+        Emprestimo emprestimo = emprestimoDAO.findByAlunoMatricula(alunoMatricula);
+        List<ItemEmprestimo> itensEmprestimo = itemEmprestimoService.listarItensPorEmprestimo(emprestimo.getId());
+        List<Livro> livros = new ArrayList<>();
+        for (ItemEmprestimo item : itensEmprestimo) {
+            livros.add(item.getLivro());
+        }
+        return new EmprestimoAlunoResponseDTO(
+                livros
+        );
+    }
+
+    public void atualizarEmprestimo(Emprestimo emprestimo) {
+        emprestimoDAO.atualizarEmprestimoDevolucao(emprestimo);
     }
 }

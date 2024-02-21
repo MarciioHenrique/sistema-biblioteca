@@ -30,3 +30,9 @@ export interface EmprestimoRequest {
     itensEmprestimo: LivroResponse[];
     dataEmprestimo: string;
 }
+
+export interface DevolucaoRequest {
+    dataDevolucao: string;
+    alunoMatricula: string;
+    itensDevolucao: LivroResponse[];
+}

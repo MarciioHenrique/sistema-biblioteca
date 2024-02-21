@@ -5,6 +5,7 @@ import Home from '../pages/home';
 import Alunos from '../pages/alunos';
 import Livros from '../pages/livros';
 import Emprestimo from '../pages/emprestimo';
+import Devolucao from '../pages/devolucao';
 
 const Routes = () => {
   return (
@@ -16,6 +17,7 @@ const Routes = () => {
             <Route path="/alunos" element={<Alunos />} />
             <Route path="/livros" element={<Livros />} />            
             <Route path="/emprestimo" element={<Emprestimo />} />
+            <Route path="/devolucao" element={<Devolucao />} />
         </RouterRoutes>
       </Fragment>
     </BrowserRouter>

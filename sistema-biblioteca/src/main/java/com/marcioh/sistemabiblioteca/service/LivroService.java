@@ -21,4 +21,8 @@ public class LivroService {
     public Livro cadastrarLivro(Livro livro) {
         return livroDAO.save(livro);
     }
+
+    public Livro atualizarDisponibilidade(Livro livro) {
+        return livroDAO.livroIndisponivel(livro);
+    }
 }

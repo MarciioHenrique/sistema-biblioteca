@@ -20,15 +20,22 @@ public class ItemEmprestimoService {
     @Autowired
     private ItemEmprestimoRepository itemEmprestimoDAO;
 
+    @Autowired
+    private LivroService livroService;
+
     public List<ItemEmprestimo> listarItensEmprestimo() {
         return itemEmprestimoDAO.findAll();
+    }
+
+    public List<ItemEmprestimo> listarItensPorEmprestimo(Long emprestimoId) {
+        return itemEmprestimoDAO.findByEmprestimo(emprestimoId);
     }
 
     public ItemEmprestimo cadastrarItemEmprestimo(ItemEmprestimo itemEmprestimo) {
         return itemEmprestimoDAO.save(itemEmprestimo);
     }
 
-    public List<ItemEmprestimo> verificarLivros(List<Livro> itemEmprestimoRequest) {
+        public List<ItemEmprestimo> verificarLivros(List<Livro> itemEmprestimoRequest) {
         List<ItemEmprestimo> itensEmprestimo = new ArrayList<>();
         for (Livro itemEmprestimo : itemEmprestimoRequest) {
             if (itemEmprestimoDAO.findByLivro(itemEmprestimo.getId())) {
@@ -53,6 +60,9 @@ public class ItemEmprestimoService {
         for (ItemEmprestimo item : itensEmprestimo) {
             item.setEmprestimo(emprestimo);
             cadastrarItemEmprestimo(item);
+            Livro livro = item.getLivro();
+            livro.setDisponivel(false);
+            livroService.atualizarDisponibilidade(livro);
             response.add(new ItemEmprestimoResponseDTO(
                     item.getId(),
                     item.getDataPrevista(),

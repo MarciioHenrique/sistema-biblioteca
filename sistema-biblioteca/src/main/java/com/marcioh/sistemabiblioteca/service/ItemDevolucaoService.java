@@ -19,6 +19,8 @@ public class ItemDevolucaoService {
     @Autowired
     private ItemDevolucaoRepository repository;
 
+    @Autowired LivroService livroService;
+
     public ItemDevolucao cadastrarItemDevolucao(ItemDevolucao itemDevolucao) {
         return repository.save(itemDevolucao);
     }
@@ -28,6 +30,9 @@ public class ItemDevolucaoService {
         for (ItemDevolucao itemDevolucao : itensDevolucao) {
             itemDevolucao.setDevolucao(devolucao);
             cadastrarItemDevolucao(itemDevolucao);
+            Livro livro = itemDevolucao.getLivro();
+            livro.setDisponivel(true);
+            livroService.atualizarDisponibilidade(livro);
             itensDevolucaoResponse.add(new ItemDevolucaoResponseDTO(
                     itemDevolucao.getDataDevolucao(),
                     itemDevolucao.getDiasAtraso(),
